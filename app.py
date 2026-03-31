@@ -1,4 +1,5 @@
-return "CI/CD Pipeline Running - Updated"
+def get_message():
+    return "CI/CD Pipeline Running - Updated"
 
 
 def main():
@@ -7,3 +8,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
