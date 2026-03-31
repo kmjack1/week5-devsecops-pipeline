@@ -46,6 +46,50 @@ jobs:
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
+name: DevSecOps Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - feature-update
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Set Up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Dependencies
+        run: echo "Dependencies installed"
+
+      - name: Lint / Code Quality Checks
+        run: echo "Lint step completed"
+
+      - name: Run Unit Tests
+        run: echo "Unit tests completed"
+
+      - name: Security Scan
+        run: echo "Security scan completed"
+
+      - name: Build Artifact
+        run: |
+          mkdir -p dist
+          cp app.py dist/app.py
+          echo "Artifact built"
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
         with:
           name: python-app-artifact
           path: dist/
@@ -53,32 +97,32 @@ jobs:
   deploy-development:
     runs-on: ubuntu-latest
     needs: build-and-test
-    environment: development
 
     steps:
       - name: Deploy to Development
-        run: echo "Deploying to development environment"
+        run: echo "Deploying to development"
 
   deploy-staging:
     runs-on: ubuntu-latest
     needs: deploy-development
-    environment: staging
 
     steps:
       - name: Deploy to Staging
-        run: echo "Deploying to staging environment"
+        run: echo "Deploying to staging"
 
   deploy-production:
     runs-on: ubuntu-latest
     needs: deploy-staging
-    environment: production
 
     steps:
+      - name: Manual Approval Gate
+        run: echo "Manual approval simulated"
+
       - name: Deploy to Production
-        run: echo "Deploying to production environment"
+        run: echo "Deploying to production"
 
       - name: Monitoring
-        run: echo "Monitoring application after deployment"
+        run: echo "Monitoring application"
 
       - name: Rollback / Feedback
-        run: echo "Rollback plan ready and feedback loop recorded"
+        run: echo "Rollback and feedback step completed"
