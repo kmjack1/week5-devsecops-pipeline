@@ -28,7 +28,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Lint / Code Quality Checks
-        run: echo "Skipping lint for this lab build"
+        run: echo "Skipping lint for assignment"
 
       - name: Run Unit Tests
         run: |
