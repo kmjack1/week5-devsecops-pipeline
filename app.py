@@ -1,5 +1,5 @@
 def get_message():
-    return "CI/CD Pipeline Running"
+    return "CI/CD Pipeline Running - Updated"
 
 
 def main():
